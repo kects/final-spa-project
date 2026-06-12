@@ -21,7 +21,19 @@ const router = createRouter({
       name: 'movie-detail',
       component: MovieDetailView
     }
-  ]
+  ],
+
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(savedPosition);
+        }, 0);
+      });
+    }
+
+    return { top: 0 };
+  }
 });
 
 export default router;
