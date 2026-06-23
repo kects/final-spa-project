@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import MoviesView from '../views/MoviesView.vue';
 import MovieDetailView from '../views/MovieDetailView.vue';
+import FavoritesView from '../views/FavoritesView.vue';
+import SearchResultView from '../views/SearchResultView.vue';
 import NotFoundView from '../views/NotFoundView.vue';
 
 const router = createRouter({
@@ -10,23 +12,33 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
     },
     {
       path: '/movies',
       name: 'movies',
-      component: MoviesView
+      component: MoviesView,
+    },
+    {
+      path: '/search',
+      name: 'search-results',
+      component: SearchResultView,
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: FavoritesView,
     },
     {
       path: '/movies/:id',
       name: 'movie-detail',
-      component: MovieDetailView
+      component: MovieDetailView,
     },
-    { 
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
-      component: NotFoundView
-    }
+      component: NotFoundView,
+    },
   ],
 
   scrollBehavior(to, from, savedPosition) {
@@ -39,7 +51,7 @@ const router = createRouter({
     }
 
     return { top: 0 };
-  }
+  },
 });
 
 export default router;

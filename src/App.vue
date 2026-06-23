@@ -15,7 +15,7 @@ const averageFavoritesRating = computed(() => {
   }
 
   const totalRatingSum = store.favorites.reduce((accumulator, movie) => {
-    return accumulator + movie.vote_average;
+    return accumulator + Number(movie.vote_average || 0);
   }, 0);
 
   const calculatedAverage = totalRatingSum / store.favorites.length;
@@ -35,13 +35,14 @@ const averageFavoritesRating = computed(() => {
         <nav class="nav-menu">
           <RouterLink to="/" class="nav-item">홈</RouterLink>
           <RouterLink to="/movies" class="nav-item">영화 목록</RouterLink>
+          <RouterLink to="/favorites" class="nav-item">찜 목록</RouterLink>
         </nav>
 
         <div class="header-dashboard">
-          <div class="dashboard-badge favorite-count">
+          <RouterLink to="/favorites" class="dashboard-badge favorite-count">
             <span class="badge-label">❤️ 찜한 작품</span>
             <span class="badge-value">{{ totalFavoritesCount }}개</span>
-          </div>
+          </RouterLink>
 
           <div class="dashboard-badge average-rating">
             <span class="badge-label">⭐ 평균 평점</span>
@@ -79,10 +80,11 @@ const averageFavoritesRating = computed(() => {
 .header-content {
   max-width: 1200px;
   margin: 0 auto;
-  height: 80px;
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .logo-zone {
@@ -109,7 +111,7 @@ const averageFavoritesRating = computed(() => {
 
 .nav-menu {
   display: flex;
-  gap: 30px;
+  gap: 20px;
 }
 
 .nav-item {
@@ -145,6 +147,7 @@ const averageFavoritesRating = computed(() => {
   align-items: center;
   gap: 8px;
   border: 1px solid #3f4656;
+  text-decoration: none;
 }
 
 .badge-label {
@@ -167,5 +170,17 @@ const averageFavoritesRating = computed(() => {
   flex-grow: 1;
   width: 100%;
   box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .header-content {
+    flex-direction: column;
+    padding: 16px 0;
+  }
+
+  .header-dashboard {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 </style>
